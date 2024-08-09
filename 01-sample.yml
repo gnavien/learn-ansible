@@ -1,6 +1,9 @@
 - name: Demo Playbook
-  hosts: all
-  tasks:
-    -name: Priny Hello World
-    ansible.builtin.debug:
+  hosts: all                               #all hosts
+  become: yes                              #become is used to run in root user
+  tasks:                                   #We need to mention task or role which is mandatory
+    -name: Print Hello World
+    ansible.builtin.debug:                  #Debug is a printing function
       msg: "Hello, World!"
+
+# ansible-playbook -i 172.168.0.x, all -m ping -e ansible_user=centos -e ansible_password=DevOps321
