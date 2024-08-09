@@ -1,0 +1,8 @@
+- name: Declare a Variable
+  hosts: all
+  vars:
+    URL: example.com
+  tasks:
+    - name: print the URL variable
+      ansible.builtin.debug:
+        msg: "The URL is {{ URL }}"  # When we are calling a variable it has to be in a flower braces.
