@@ -1,0 +1,19 @@
+- name: Demo on Conditions
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Print Hello Universe
+      ansible.builtin.debug:
+        msg: "Hello Universe"
+      when: what == "Hello Universe"
+    - name: Print Hello World
+      ansible.builtin.debug:
+        msg: "Hello world"
+      when: what == "Hello World"
+
+# ansible-playbook condition.yml -e what == "hello Universe" (While executing we need mention what needs to be checked)
+
+
+
+
+
