@@ -6,3 +6,16 @@
     - name: print the URL variable
       ansible.builtin.debug:
         msg: "The URL is {{ URL }}"  # When we are calling a variable it has to be in a flower braces.
+
+# Ansible Filters, if you want to filter a specific value from the output.
+- name: Register a variable # Any task you run will be
+  hosts: local
+  connection: local
+  tasks:
+    - name: shell command
+      ansible.builtin.shell: uptime
+      register: output
+
+    - name: Print O/P
+      ansible.builtin.debug:
+        msg: "{{ output.stdout | split(' ') | last }}"
