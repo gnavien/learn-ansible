@@ -4,8 +4,8 @@ metadata:
   name: aws-access-keys
 type: opaque
 data:
-  AWS_ACCESS_KEY_ID: QUtJQTZHQk1ITFE0WllCRE9ZRUE=
-  AWS_SECRET_ACCESS_KEY: UXBieE9QL2tLSDBkUmg0Zm1mNXZyQmQ5OTBPU1dXblRUVnNHYXN2QQ==
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
 
 ---
 apiVersion: apps/v1
