@@ -57,7 +57,7 @@ spec:
       name: us-east-1a
       type: Public
       zone: us-east-1a
-    - cidr: 192.168.2.0/24
+    - cidr: 92.168.2.0/24
       name: us-east-1b
       type: Public
       zone: us-east-1b
@@ -96,8 +96,8 @@ metadata:
 spec:
   image: 099720109477/ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20241113
   machineType: t3.medium
-  maxSize: 1
-  minSize: 1
+  maxSize: 2
+  minSize: 2
   role: Node
   rootVolumeSize: 10
   subnets:
@@ -132,5 +132,5 @@ metadata:
     kops.k8s.io/cluster: saty.fun
   name: admin
 spec:
-  publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj0Lfzj72nosimbxmX37JfUvkvnvvtyDgybUzCEcURSwKDXAV+IfYRW8vZga2W2oL3QpJ7IQLRmJYGmH1/Sh7nfcBY0Tc1Dcx1dBqNLM0cJn8P7W/kMaIp4bLxcWl+Zweh7W51LrBDLTdyFL2d7+YJbhTDx08T0WGYfKD2/i6jvewflFCxwy3y4rdwPSPxU7isdFSQJOacbAzJX1jSNTuQNpahmNen9Bh7MOeJioIXFoACE4JB3cg3GBpM+uwHBDVom96mn1RDQV723IkXYEY09VxAHqmSDE+zQgAF4BZkRdfTN+iVDCsJMjA6SqJFPXBiHHrYLRjCNJRmElgnWuLpP9Tf/BKNPQBhdgz+o58BbUY6SeEhKnH9KfvFMhDaAQWKwABeJHE8B87282wK+wlyV4LzHgwYxWWXUBLDlGr4CSZ4Jz6br0BsQXh1QRDuuo5yZDZdCK4CdJWgO5rC4fbXhDWuxT7gJhv+BORGqIdwTQLDIPOj+LMppIEyVoPngVs=
-    root@ip-172-31-83-36.ec2.internal
+  publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOnRrspJpUabCAu49Q84RwMrAtYtEDw9jIAzhv5ELyo5OPkVfM+Bog4GousRGU0gzw8802xAL5iqtI9YLWL+hBnoxxX3bUbpd9YWcUWHGy1dRz5/9Fr8TapHdSP1DOhcQyOPN4cZj0GsN+pNBLSfw3ZxE9WXf8VH3UMiJl+1JTnOM+xUvPI1jMax8IWJ8d0b8/puwYtX+cFkvZosiVF1EAzaHzYOnihzXSBb0s7kFpw2Qbqui13T6XaRxIc3PzogGoR52Ep+85kxeMm2yqOabgNh+v7pmsMHoaDXJfwtYih1bOyD4OQXr4WZDHoOeZX4elvWCjAhcro7GTnLq9ncVfJP+Q3KFtkYnTwQwObShnZ36z5a55T0jtGKesBbTqsj+sM8mk56us7mb2Ykv32wDeX9fdT8mL3U+UDXNRdHARyk1g0urq9mW3Yeix05+at4PlvetKbhKLo+d+EnY7Naq7xdeOcQa+bL3om+3M2jyiUpP2nNCltLRwJlNDH0sFWFc=
+    root@ip-172-31-87-102.ec2.internal
