@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aws-access-keys
+type: opaque
+data:
+  AWS_ACCESS_KEY_ID: QUtJQTZHQk1ITFE0WllCRE9ZRUE=
+  AWS_SECRET_ACCESS_KEY: UXBieE9QL2tLSDBkUmg0Zm1mNXZyQmQ5OTBPU1dXblRUVnNHYXN2QQ==
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: awscli
+  name: awscli-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: awscli
+  template:
+    metadata:
+      labels:
+        app: awscli
+    spec:
+      containers:
+        - image: navieng/troubleshootingtools:v1
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access-keys
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access-keys
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+
+

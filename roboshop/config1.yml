@@ -1,0 +1,136 @@
+
+apiVersion: kops.k8s.io/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: null
+  name: saty.fun
+spec:
+  api:
+    dns: {}
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: s3://saty.fun1/saty.fun
+  dnsZone: saty.fun
+  etcdClusters:
+    - cpuRequest: 200m
+      etcdMembers:
+        - encryptedVolume: true
+          instanceGroup: control-plane-us-east-1a
+          name: a
+      manager:
+        backupRetentionDays: 90
+      memoryRequest: 100Mi
+      name: main
+    - cpuRequest: 100m
+      etcdMembers:
+        - encryptedVolume: true
+          instanceGroup: control-plane-us-east-1a
+          name: a
+      manager:
+        backupRetentionDays: 90
+      memoryRequest: 100Mi
+      name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubeProxy:
+    enabled: false
+  kubelet:
+    anonymousAuth: false
+  kubernetesApiAccess:
+    - 0.0.0.0/0
+    - ::/0
+  kubernetesVersion: 1.28.11
+  masterPublicName: api.saty.fun
+  networkCIDR: 192.168.0.0/16
+  networking:
+    cilium:
+      enableNodePort: true
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+    - 0.0.0.0/0
+    - ::/0
+  subnets:
+    - cidr: 192.168.1.0/24
+      name: us-east-1a
+      type: Public
+      zone: us-east-1a
+    - cidr: 192.168.2.0/24
+      name: us-east-1b
+      type: Public
+      zone: us-east-1b
+  topology:
+    dns:
+      type: Public
+
+---
+
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: saty.fun
+  name: control-plane-us-east-1a
+spec:
+  image: 099720109477/ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20240607
+  machineType: t3.medium
+  maxSize: 1
+  minSize: 1
+  role: Master
+  rootVolumeSize: 10
+  subnets:
+    - us-east-1a
+
+---
+
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: saty.fun
+  name: nodes-us-east-1a
+spec:
+  image: 099720109477/ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20240607
+  machineType: t3.medium
+  maxSize: 1
+  minSize: 1
+  role: Node
+  rootVolumeSize: 10
+  subnets:
+    - us-east-1a
+
+---
+
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: saty.fun
+  name: nodes-us-east-1b
+spec:
+  image: 099720109477/ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20240607
+  machineType: t3.medium
+  maxSize: 1
+  minSize: 1
+  role: Node
+  rootVolumeSize: 10
+  subnets:
+    - us-east-1b
+
+---
+
+apiVersion: kops.k8s.io/v1alpha2
+kind: SSHCredential
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: saty.fun
+  name: admin
+spec:
+  publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/GYNddxifOX4u727BBdIONySjtvdYWrixSaT+4Z8YaXsdSADvR5TGTLpRiyuJbv4axV4bMh9uk7zgyboe54hVcqDk0fpfpcdaDKhpyaOZuBrmflGMrpmMwBMvkKm0lYC25Vs8ww/joQpI2Tzhgs6NCIcZwT4IJMsWGhZW0GvSWY59WgYfd/N/T/StwNV1t3oL3Wr3NFmcoYAt0H6NW8kLX2C+ID+oLnhi84htFwllBpuzSKvf5WvJlBXRL3d/zPdsA0z53lFusXRaRtGkoMBTSbV8i8GdC19bBhRaDSTZ86fNYO4JG65zlrZQch8rEp2Wh3hMrcIf9mkDlwgNqRjldj34kZW/m5qNTkZQxUQQEVJhfTYnrb5/28kQdCGGg/TPG3htPaupRv4AZ01rsvf3TlMXdt5Q6F1cJZrFlOs3EXvdcbukfgL+uuDg9zirpMGDyElB9YRCJ19tkehc/h5qDbxBjKht4EyYp7/O11ejWET3q+9duhRNlE8Mrd+bnl0=
+    root@ip-172-31-31-85.ec2.internal
